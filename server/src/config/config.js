@@ -22,6 +22,7 @@ const _config = {
   PORT: process.env.PORT || 5000,
   JWT_ACCESS_TOKEN_SECRET: process.env.JWT_ACCESS_TOKEN_SECRET,
   JWT_REFRESH_TOKEN_SECRET: process.env.JWT_REFRESH_TOKEN_SECRET,
+  NODE_ENV: process.env.NODE_ENV,
 }
 
 export default Object.freeze(_config)
