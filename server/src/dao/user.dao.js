@@ -20,3 +20,27 @@ export const getUserByEmailOrUsername = async ({ email, username }) => {
 
   return user
 }
+
+/**
+ * Retrieves a user by the provided userId.
+ * @param {string} userId - The ID of the user to retrieve.
+ * @returns {Promise<Object|null>} - The retrieved user object or null if not found.
+ */
+export const getUserById = async (userId) => {
+  const user = await userModel.findById(userId);
+  return user;
+}
+
+
+/**
+ * search a user by the provided username.
+ * @param {string} query - The query to search for.
+ * @returns {Promise<[]>} - An array of user objects that match the query or null if not found.
+ */
+export const searchUserByUsername = async (query) => {
+  const users = await userModel.find({
+    username: { $regex: query, $options: 'i' }
+  }).select('username email');
+
+  return users;
+}

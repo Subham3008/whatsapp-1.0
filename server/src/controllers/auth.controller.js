@@ -41,7 +41,7 @@ export const registerUser = async (req, res) => {
       },
       tokens: {
         accessToken,
-        refreshToken,
+        // refreshToken,
       }
     }
   })
@@ -160,4 +160,33 @@ export const refreshTokenController = async (req, res) => {
       return res.status(400).json({ message: "Invalid or expire refresh token" })
     }
   }
+}
+
+
+/**
+ * function for get me 
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves when the user data is retrieved.
+ */
+export const getMe = async (req, res) => {
+  const userId = req.userId;
+
+  const user = await userDao.getUserById(userId);
+
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+
+  return res.status(200).json({
+    message: 'User data retrieved successfully',
+    data: {
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
+    }
+  })
+
 }
