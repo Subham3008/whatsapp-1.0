@@ -64,11 +64,11 @@ export const loginUser = async (req, res) => {
   }
 
   const accessToken = authUtils.generateAccessToken(user._id)
-  const refreshtoken = authUtils.generateRefreshToken(user._id)
+  const refreshToken = authUtils.generateRefreshToken(user._id)
 
   await sessionDao.updateSessionByUserId(user._id, { refreshToken })
 
-  res.cookie('refreshToken', refreshtoken, {
+  res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
     secure: config.NODE_ENV === 'production',
     sameSite: 'strict',
