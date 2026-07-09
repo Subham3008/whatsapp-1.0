@@ -63,17 +63,17 @@ export const loginUser = async (req, res) => {
     return res.status(400).json({ message: "Invalid Password" })
   }
 
-  const accessToken = authUtils.generateAccessToken(user._id)
-  const refreshToken = authUtils.generateRefreshToken(user._id)
+  const accessToken = authUtils.generateAccessToken(user._id);
+  const refreshToken = authUtils.generateRefreshToken(user._id);
 
-  await sessionDao.updateSessionByUserId(user._id, { refreshToken })
+  await sessionDao.updateSessionByUserId(user._id, { refreshToken });
 
-  res.cookie('refreshToken', refreshToken, {
+  res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: config.NODE_ENV === 'production',
-    sameSite: 'strict',
-    maxAge: 7 * 24 * 60 * 60 * 1000
-  })
+    secure: config.NODE_ENV === "production",
+    sameSite: "strict",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
 
   return res.status(200).json({
     message: 'User logged in successfully',
