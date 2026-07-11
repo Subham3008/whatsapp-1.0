@@ -8,14 +8,14 @@ const useAuth = () => {
 
   const register = async ({ username, email, password }) => {
     const data = await registerUser({ username, email, password })
-    dispatch(setUser(data.data.user))
-    dispatch(setAccessToken(data.data.accessToken))
+    dispatch(setUser(data.user))
+    dispatch(setAccessToken(data.accessToken))
   }
 
   const login = async ({ email, password }) => {
     const data = await loginUser({ email, password })
-    dispatch(setUser(data.data.user))
-    dispatch(setAccessToken(data.data.tokens.accessToken))
+    dispatch(setUser(data.user))
+    dispatch(setAccessToken(data.tokens.accessToken))
   }
 
   return { register, login }

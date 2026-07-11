@@ -7,13 +7,13 @@ const authApi = globalApi.create({
 export const registerUser = async ({ username, email, password }) => {
   const response = await authApi.post("/register", { username, email, password })
 
-  return response.data
+  return response.data.data
 }
 
 
 export const loginUser = async ({ email, password }) => {
   const response = await authApi.post("/login", { email, password })
 
-  return response.data
+  return response.data.data
 }
 
